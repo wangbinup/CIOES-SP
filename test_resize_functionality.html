@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽调整大小功能测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .test-container {
+            display: flex;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        /* 左侧面板 */
+        .left-panel {
+            width: 280px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #d0d0d0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 右侧面板 */
+        .right-panel {
+            width: 320px;
+            background-color: #f9f9f9;
+            border-left: 1px solid #d0d0d0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 中央面板 */
+        .center-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* 面板节 */
+        .panel-section {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #e0e0e0;
+            min-height: 100px;
+            overflow-y: auto;
+        }
+
+        .panel-section:last-child {
+            border-bottom: none;
+            flex: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+            border-bottom: 1px solid #d0d0d0;
+            font-size: 11px;
+        }
+
+        .section-header h3 {
+            font-size: 11px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .section-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        /* 拖拽手柄样式 */
+        .resize-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            cursor: ew-resize;
+            background-color: transparent;
+            transition: background-color 0.2s ease;
+            z-index: 1000;
+        }
+
+        .left-panel .resize-handle {
+            right: -2px;
+        }
+
+        .right-panel .resize-handle {
+            left: -2px;
+        }
+
+        .resize-handle:hover {
+            background-color: #4472C4;
+        }
+
+        .resize-handle.dragging {
+            background-color: #2E5394;
+        }
+
+        /* 垂直拖拽手柄 */
+        .visibility-resize-handle,
+        .message-resize-handle {
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            cursor: ns-resize;
+            background-color: transparent;
+            transition: background-color 0.2s ease;
+            z-index: 1001;
+        }
+
+        .visibility-resize-handle:hover,
+        .message-resize-handle:hover {
+            background-color: #4472C4;
+        }
+
+        .visibility-resize-handle.dragging,
+        .message-resize-handle.dragging {
+            background-color: #2E5394;
+        }
+
+        /* 拖拽时的视觉反馈 */
+        .resizing {
+            user-select: none;
+        }
+
+        .resizing * {
+            pointer-events: none;
+        }
+
+        .resizing .resize-handle {
+            pointer-events: auto;
+        }
+
+        /* 最小尺寸限制 */
+        .left-panel {
+            min-width: 200px;
+            max-width: 500px;
+        }
+
+        .right-panel {
+            min-width: 250px;
+            max-width: 600px;
+        }
+
+        .panel-section {
+            min-height: 100px;
+        }
+
+        /* 拖拽时的光标样式 */
+        body.resizing {
+            cursor: ew-resize;
+        }
+
+        body.resizing-vertical {
+            cursor: ns-resize;
+        }
+
+        /* 测试内容样式 */
+        .test-content {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .test-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .test-content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .model-tree-content {
+            padding: 10px;
+        }
+
+        .tree-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .visibility-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+        }
+
+        .property-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+            <!-- 水平拖拽手柄 -->
+            <div class="resize-handle"></div>
+            
+            <!-- 模型树 -->
+            <div class="panel-section">
+                <div class="section-header">
+                    <h3>模型树</h3>
+                </div>
+                <div class="section-content">
+                    <div class="model-tree-content">
+                        <div class="tree-item">海洋管道工程</div>
+                        <div class="tree-item">项目信息管理</div>
+                        <div class="tree-item">项目基础信息</div>
+                        <div class="tree-item">项目详细信息</div>
+                        <div class="tree-item">项目管段信息</div>
+                        <div class="tree-item">其他输入信息</div>
+                        <div class="tree-item">海洋环境数据</div>
+                        <div class="tree-item">波浪</div>
+                        <div class="tree-item">海流</div>
+                        <div class="tree-item">水位</div>
+                        <div class="tree-item">管道系统</div>
+                        <div class="tree-item">主管道</div>
+                        <div class="tree-item">支管道</div>
+                        <div class="tree-item">支架系统</div>
+                        <div class="tree-item">支架S001</div>
+                        <div class="tree-item">支架S002</div>
+                        <div class="tree-item">支架S003</div>
+                        <div class="tree-item">荷载系统</div>
+                        <div class="tree-item">重力荷载</div>
+                        <div class="tree-item">波浪荷载</div>
+                        <div class="tree-item">海流荷载</div>
+                        <div class="tree-item">分析结果</div>
+                        <div class="tree-item">位移结果</div>
+                        <div class="tree-item">应力结果</div>
+                        <div class="tree-item">约束反力</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 显隐控制 -->
+            <div class="panel-section" style="position: relative;">
+                <!-- 垂直拖拽手柄 -->
+                <div class="visibility-resize-handle"></div>
+                
+                <div class="section-header">
+                    <h3>显隐控制</h3>
+                </div>
+                <div class="section-content">
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 管点名称
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 土壤点
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 管点符号
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 管点
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 组件
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 分段
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 所选分段
+                    </div>
+                    <div class="visibility-item">
+                        <input type="checkbox" checked> 未选分段
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中央视图区域 -->
+        <div class="center-panel">
+            <div class="test-content">
+                <h2>拖拽调整大小功能测试</h2>
+                <p>您可以测试以下功能：</p>
+                <p>1. 左右拖拽左侧面板右边缘来调整左侧面板宽度</p>
+                <p>2. 左右拖拽右侧面板左边缘来调整右侧面板宽度</p>
+                <p>3. 上下拖拽显隐控制区域上边缘来调整模型树和显隐控制的高度比例</p>
+                <p>4. 上下拖拽消息面板上边缘来调整属性面板和消息面板的高度比例</p>
+                <p>5. 当模型树或属性面板内容超出显示区域时，会自动显示滚动条</p>
+            </div>
+        </div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+            <!-- 水平拖拽手柄 -->
+            <div class="resize-handle"></div>
+            
+            <!-- 属性面板 -->
+            <div class="panel-section">
+                <div class="section-header">
+                    <h3>属性面板</h3>
+                </div>
+                <div class="section-content">
+                    <div class="property-item">
+                        <strong>名称:</strong> 主管道-P001
+                    </div>
+                    <div class="property-item">
+                        <strong>类型:</strong> 管道
+                    </div>
+                    <div class="property-item">
+                        <strong>材质:</strong> API 5L X65
+                    </div>
+                    <div class="property-item">
+                        <strong>外径:</strong> 508 mm
+                    </div>
+                    <div class="property-item">
+                        <strong>壁厚:</strong> 12.7 mm
+                    </div>
+                    <div class="property-item">
+                        <strong>长度:</strong> 6000 mm
+                    </div>
+                    <div class="property-item">
+                        <strong>弹性模量:</strong> 200 GPa
+                    </div>
+                    <div class="property-item">
+                        <strong>屈服强度:</strong> 450 MPa
+                    </div>
+                    <div class="property-item">
+                        <strong>密度:</strong> 7850 kg/m³
+                    </div>
+                    <div class="property-item">
+                        <strong>泊松比:</strong> 0.3
+                    </div>
+                    <div class="property-item">
+                        <strong>热膨胀系数:</strong> 1.2e-5 /°C
+                    </div>
+                    <div class="property-item">
+                        <strong>工作温度:</strong> 20°C
+                    </div>
+                    <div class="property-item">
+                        <strong>工作压力:</strong> 10 MPa
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 消息面板 -->
+            <div class="panel-section" style="position: relative;">
+                <!-- 垂直拖拽手柄 -->
+                <div class="message-resize-handle"></div>
+                
+                <div class="section-header">
+                    <h3>消息</h3>
+                </div>
+                <div class="section-content">
+                    <div class="message-item">
+                        <strong>信息:</strong> 模型加载完成
+                        <br><small>10:30:25</small>
+                    </div>
+                    <div class="message-item">
+                        <strong>警告:</strong> 支架S002位置检查
+                        <br><small>10:28:15</small>
+                    </div>
+                    <div class="message-item">
+                        <strong>成功:</strong> 分析计算完成
+                        <br><small>10:25:08</small>
+                    </div>
+                    <div class="message-item">
+                        <strong>信息:</strong> 网格划分完成
+                        <br><small>10:20:12</small>
+                    </div>
+                    <div class="message-item">
+                        <strong>信息:</strong> 边界条件设置完成
+                        <br><small>10:15:30</small>
+                    </div>
+                    <div class="message-item">
+                        <strong>信息:</strong> 荷载施加完成
+                        <br><small>10:10:45</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ResizeTest {
+            constructor() {
+                this.initResizeHandles();
+            }
+
+            initResizeHandles() {
+                // 初始化水平拖拽
+                this.initPanelResize();
+                // 初始化垂直拖拽
+                this.initSectionResize();
+            }
+
+            initPanelResize() {
+                // 左侧面板拖拽
+                const leftResizeHandle = document.querySelector('.left-panel .resize-handle');
+                if (leftResizeHandle) {
+                    this.setupResizeHandle(leftResizeHandle, 'horizontal', 'left-panel');
+                }
+
+                // 右侧面板拖拽
+                const rightResizeHandle = document.querySelector('.right-panel .resize-handle');
+                if (rightResizeHandle) {
+                    this.setupResizeHandle(rightResizeHandle, 'horizontal', 'right-panel');
+                }
+            }
+
+            initSectionResize() {
+                // 显隐控制区域拖拽
+                const visibilityResizeHandle = document.querySelector('.visibility-resize-handle');
+                if (visibilityResizeHandle) {
+                    this.setupResizeHandle(visibilityResizeHandle, 'vertical', 'visibility-section');
+                }
+
+                // 消息面板拖拽
+                const messageResizeHandle = document.querySelector('.message-resize-handle');
+                if (messageResizeHandle) {
+                    this.setupResizeHandle(messageResizeHandle, 'vertical', 'message-section');
+                }
+            }
+
+            setupResizeHandle(handle, direction, targetClass) {
+                let isResizing = false;
+                let startPos = 0;
+                let startTargetSize = 0;
+                let startAdjacentSize = 0;
+                let targetElement = null;
+                let adjacentElement = null;
+
+                // 根据目标类名找到对应的元素
+                if (targetClass === 'left-panel') {
+                    targetElement = document.querySelector('.left-panel');
+                } else if (targetClass === 'right-panel') {
+                    targetElement = document.querySelector('.right-panel');
+                } else if (targetClass === 'visibility-section') {
+                    targetElement = document.querySelector('.left-panel .panel-section:nth-child(3)'); // 显隐控制
+                    adjacentElement = document.querySelector('.left-panel .panel-section:nth-child(2)'); // 模型树
+                } else if (targetClass === 'message-section') {
+                    targetElement = document.querySelector('.right-panel .panel-section:nth-child(3)'); // 消息面板
+                    adjacentElement = document.querySelector('.right-panel .panel-section:nth-child(2)'); // 属性面板
+                }
+
+                if (!targetElement) return;
+
+                const minSectionHeight = 100; // 最小区域高度
+                const minPanelWidth = { 'left-panel': 200, 'right-panel': 250 };
+                const maxPanelWidth = { 'left-panel': 500, 'right-panel': 600 };
+
+                const startResize = (e) => {
+                    e.preventDefault();
+                    isResizing = true;
+                    
+                    if (direction === 'horizontal') {
+                        startPos = e.clientX;
+                        startTargetSize = targetElement.offsetWidth;
+                        document.body.classList.add('resizing');
+                    } else {
+                        startPos = e.clientY;
+                        startTargetSize = targetElement.offsetHeight;
+                        if (adjacentElement) {
+                            startAdjacentSize = adjacentElement.offsetHeight;
+                        }
+                        document.body.classList.add('resizing-vertical');
+                    }
+                    
+                    handle.classList.add('dragging');
+                    
+                    // 添加全局鼠标事件监听
+                    document.addEventListener('mousemove', resize);
+                    document.addEventListener('mouseup', stopResize);
+                };
+
+                const resize = (e) => {
+                    if (!isResizing) return;
+                    
+                    let newTargetSize;
+                    
+                    if (direction === 'horizontal') {
+                        const delta = e.clientX - startPos;
+                        if (targetClass === 'left-panel') {
+                            newTargetSize = startTargetSize + delta;
+                        } else { // right-panel
+                            newTargetSize = startTargetSize - delta;
+                        }
+                        
+                        // 限制最小和最大宽度
+                        newTargetSize = Math.max(minPanelWidth[targetClass], Math.min(newTargetSize, maxPanelWidth[targetClass]));
+                        targetElement.style.width = newTargetSize + 'px';
+                    } else {
+                        // 垂直拖拽 - 调整目标区域和相邻区域的高度
+                        const delta = e.clientY - startPos;
+                        newTargetSize = startTargetSize - delta; // 目标区域根据拖拽方向反向调整
+                        
+                        let newAdjacentSize = startAdjacentSize + delta; // 相邻区域反向调整
+                        
+                        const totalCombinedHeight = startTargetSize + startAdjacentSize;
+                        
+                        // 应用最小高度限制
+                        if (newTargetSize < minSectionHeight) {
+                            newTargetSize = minSectionHeight;
+                            newAdjacentSize = totalCombinedHeight - newTargetSize;
+                        }
+                        if (newAdjacentSize < minSectionHeight) {
+                            newAdjacentSize = minSectionHeight;
+                            newTargetSize = totalCombinedHeight - newAdjacentSize;
+                        }
+                        
+                        targetElement.style.height = newTargetSize + 'px';
+                        if (adjacentElement) {
+                            adjacentElement.style.height = newAdjacentSize + 'px';
+                            // 为相邻区域添加滚动条
+                            adjacentElement.style.overflowY = 'auto';
+                        }
+                    }
+                };
+
+                const stopResize = () => {
+                    if (!isResizing) return;
+                    
+                    isResizing = false;
+                    handle.classList.remove('dragging');
+                    document.body.classList.remove('resizing', 'resizing-vertical');
+                    
+                    // 移除全局事件监听
+                    document.removeEventListener('mousemove', resize);
+                    document.removeEventListener('mouseup', stopResize);
+                    
+                    console.log(`${targetClass} 尺寸调整完成`);
+                };
+
+                handle.addEventListener('mousedown', startResize);
+            }
+        }
+
+        // 初始化测试
+        document.addEventListener('DOMContentLoaded', () => {
+            new ResizeTest();
+        });
+    </script>
+</body>
+</html> 
