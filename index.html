@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIOES-SP V1.0.0</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部标题栏 -->
+        <div class="title-bar">
+            <div class="title-left">
+                <div class="app-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <span class="app-title">CIOES-SP V1.0.0</span>
+            </div>
+            <div class="title-right">
+                <div class="window-controls">
+                    <button class="control-btn minimize"><i class="fas fa-minus"></i></button>
+                    <button class="control-btn maximize"><i class="far fa-square"></i></button>
+                    <button class="control-btn close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ribbon菜单栏 -->
+        <div class="ribbon-container">
+            <!-- 菜单选项卡 -->
+            <div class="ribbon-tabs">
+                <div class="ribbon-tab active" data-tab="file">
+                    <span>文件</span>
+                </div>
+                <div class="ribbon-tab" data-tab="home">
+                    <span>主页</span>
+                </div>
+                <div class="ribbon-tab" data-tab="view">
+                    <span>视角</span>
+                </div>
+                <div class="ribbon-tab" data-tab="display">
+                    <span>显示</span>
+                </div>
+                <div class="ribbon-tab" data-tab="select">
+                    <span>选择</span>
+                </div>
+                <div class="ribbon-tab" data-tab="insert">
+                    <span>插入</span>
+                </div>
+                <div class="ribbon-tab" data-tab="modify">
+                    <span>修改</span>
+                </div>
+                <div class="ribbon-tab" data-tab="delete">
+                    <span>删除</span>
+                </div>
+                <div class="ribbon-tab" data-tab="load">
+                    <span>荷载</span>
+                </div>
+                <div class="ribbon-tab" data-tab="analysis">
+                    <span>分析</span>
+                </div>
+                <div class="ribbon-tab" data-tab="result">
+                    <span>结果</span>
+                </div>
+                <div class="ribbon-tab" data-tab="tools">
+                    <span>工具</span>
+                </div>
+                <div class="ribbon-tab" data-tab="support">
+                    <span>支架优化</span>
+                </div>
+                <div class="ribbon-tab" data-tab="help">
+                    <span>帮助</span>
+                </div>
+            </div>
+
+            <!-- Ribbon工具栏内容 -->
+            <div class="ribbon-content">
+                <!-- 文件选项卡内容 -->
+                <div class="ribbon-panel" id="file-panel">
+                    <div class="ribbon-group">
+                        <div class="group-header">文件操作</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-file-plus"></i></div>
+                                <div class="item-text">新建</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-folder-open"></i></div>
+                                <div class="item-text">打开</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-clock"></i></div>
+                                <div class="item-text">最近</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div class="item-text">示例</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">保存</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-times"></i></div>
+                                <div class="item-text">关闭</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-save"></i></div>
+                                <div class="item-text">保存</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-file-export"></i></div>
+                                <div class="item-text">另存为</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-camera"></i></div>
+                                <div class="item-text">保存截图</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">导入导出</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-file-import"></i></div>
+                                <div class="item-text">导入</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-file-export"></i></div>
+                                <div class="item-text">导出</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">打印</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-print"></i></div>
+                                <div class="item-text">打印预览</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-print"></i></div>
+                                <div class="item-text">打印</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">浏览</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-search"></i></div>
+                                <div class="item-text">模型浏览器</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 主页选项卡内容 -->
+                <div class="ribbon-panel" id="home-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">编辑操作</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-paste"></i></div>
+                                <div class="item-text">粘贴</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-cut"></i></div>
+                                <div class="item-text">剪切</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-copy"></i></div>
+                                <div class="item-text">复制</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-undo"></i></div>
+                                <div class="item-text">撤销</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-redo"></i></div>
+                                <div class="item-text">恢复</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视角选项卡内容 -->
+                <div class="ribbon-panel" id="view-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">视图方向</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-cube"></i></div>
+                                <div class="item-text">轴测视角</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-arrow-down"></i></div>
+                                <div class="item-text">顶视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-arrow-right"></i></div>
+                                <div class="item-text">前视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-arrow-left"></i></div>
+                                <div class="item-text">右视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-rotate-right"></i></div>
+                                <div class="item-text">0°视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-rotate-right"></i></div>
+                                <div class="item-text">90°视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-rotate-right"></i></div>
+                                <div class="item-text">180°视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-rotate-right"></i></div>
+                                <div class="item-text">270°视图</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-home"></i></div>
+                                <div class="item-text">Default</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-home"></i></div>
+                                <div class="item-text">Default All</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-vector-square"></i></div>
+                                <div class="item-text">Vector</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">缩放平移</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-hand-paper"></i></div>
+                                <div class="item-text">交互平移</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-search-plus"></i></div>
+                                <div class="item-text">放大</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-search-minus"></i></div>
+                                <div class="item-text">缩小</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-undo"></i></div>
+                                <div class="item-text">上一个缩放</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-crop"></i></div>
+                                <div class="item-text">方框缩放</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">显示模式</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-border-none"></i></div>
+                                <div class="item-text">线框模式</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-shapes"></i></div>
+                                <div class="item-text">实体模式</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">坐标轴</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-crosshairs"></i></div>
+                                <div class="item-text">全局轴</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-crosshairs"></i></div>
+                                <div class="item-text">局部轴</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">视口</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-square-full"></i></div>
+                                <div class="item-text">单视口</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-columns"></i></div>
+                                <div class="item-text">双视口</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-th-large"></i></div>
+                                <div class="item-text">四视口</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 显示选项卡内容 -->
+                <div class="ribbon-panel" id="display-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">显示控制</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-tag"></i></div>
+                                <div class="item-text">管点名称</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-circle"></i></div>
+                                <div class="item-text">土壤点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="item-text">管点符号</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-refresh"></i></div>
+                                <div class="item-text">重置显示选项</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">显隐控制</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-dot-circle"></i></div>
+                                <div class="item-text">管点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-cube"></i></div>
+                                <div class="item-text">组件</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-minus"></i></div>
+                                <div class="item-text">分段</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-check-square"></i></div>
+                                <div class="item-text">所选分段</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-square"></i></div>
+                                <div class="item-text">未选分段</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="item-text">组件</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 选择选项卡内容 -->
+                <div class="ribbon-panel" id="select-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">选择方式</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-mouse-pointer"></i></div>
+                                <div class="item-text">所有点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-dot-circle"></i></div>
+                                <div class="item-text">管点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-vector-square"></i></div>
+                                <div class="item-text">范围</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-hashtag"></i></div>
+                                <div class="item-text">管线号</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-user-edit"></i></div>
+                                <div class="item-text">自定义点</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">特殊选择</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-weight-hanging"></i></div>
+                                <div class="item-text">附加重量</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-arrows-alt"></i></div>
+                                <div class="item-text">附加力和力矩</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-link"></i></div>
+                                <div class="item-text">焊接接头点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-shake"></i></div>
+                                <div class="item-text">构件地震系数点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-shake"></i></div>
+                                <div class="item-text">管点地震系数</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-circle"></i></div>
+                                <div class="item-text">土壤点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-weight"></i></div>
+                                <div class="item-text">分布式荷载点</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 插入选项卡内容 -->
+                <div class="ribbon-panel" id="insert-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">管道组件</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-minus"></i></div>
+                                <div class="item-text">管道</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-angle-right"></i></div>
+                                <div class="item-text">弯头</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-circle"></i></div>
+                                <div class="item-text">法兰</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-code-branch"></i></div>
+                                <div class="item-text">三通</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <div class="item-text">异径接头</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-link"></i></div>
+                                <div class="item-text">焊接接头</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">支撑系统</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-grip-horizontal"></i></div>
+                                <div class="item-text">支架</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-hands-helping"></i></div>
+                                <div class="item-text">吊架</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-anchor"></i></div>
+                                <div class="item-text">固定点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-sliders-h"></i></div>
+                                <div class="item-text">滑动支撑</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                <div class="item-text">弹簧支撑</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">荷载工况</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-weight-hanging"></i></div>
+                                <div class="item-text">附加重量</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-arrows-alt"></i></div>
+                                <div class="item-text">附加力和力矩</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-weight"></i></div>
+                                <div class="item-text">分布式荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-thermometer-half"></i></div>
+                                <div class="item-text">温度荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-tint"></i></div>
+                                <div class="item-text">压力荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-shake"></i></div>
+                                <div class="item-text">地震荷载</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">环境参数</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-circle"></i></div>
+                                <div class="item-text">土壤点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-water"></i></div>
+                                <div class="item-text">水动力参数</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="item-text">管点</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-minus"></i></div>
+                                <div class="item-text">管段</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="item-text">构件地震系数</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-shake"></i></div>
+                                <div class="item-text">管点地震系数</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">工作参数</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-thermometer-half"></i></div>
+                                <div class="item-text">工作压力和温度</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-weight"></i></div>
+                                <div class="item-text">工作荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-arrows-alt"></i></div>
+                                <div class="item-text">附加位移</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-copy"></i></div>
+                                <div class="item-text">复制工作工况</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分析选项卡内容 -->
+                <div class="ribbon-panel" id="analysis-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">分析设置</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="item-text">荷载工况描述</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="item-text">静力分析组</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">分析控制</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-play"></i></div>
+                                <div class="item-text">静力分析</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-sliders-h"></i></div>
+                                <div class="item-text">收敛控制</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">检查工具</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="item-text">一致性检查</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-search"></i></div>
+                                <div class="item-text">重合节点检查</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="item-text">设计检查</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">高级功能</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-layer-group"></i></div>
+                                <div class="item-text">土壤离散化</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="item-text">全部分析</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-trash"></i></div>
+                                <div class="item-text">删除分析结果</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 结果选项卡内容 -->
+                <div class="ribbon-panel" id="result-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">基础结果</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-cube"></i></div>
+                                <div class="item-text">模型</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-shield-alt"></i></div>
+                                <div class="item-text">DNV</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-object-group"></i></div>
+                                <div class="item-text">组合</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">列表管理</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-list"></i></div>
+                                <div class="item-text">输入列表</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-list-alt"></i></div>
+                                <div class="item-text">输出列表</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-table"></i></div>
+                                <div class="item-text">结果表格</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">分析结果</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="item-text">规范应力</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-arrows-alt"></i></div>
+                                <div class="item-text">位移</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-lock"></i></div>
+                                <div class="item-text">约束</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-balance-scale"></i></div>
+                                <div class="item-text">力和力矩</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-mountain"></i></div>
+                                <div class="item-text">土壤</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">报告工具</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="item-text">扩展组件报告</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-filter"></i></div>
+                                <div class="item-text">过滤器</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-import"></i></div>
+                                <div class="item-text">输入列表</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-export"></i></div>
+                                <div class="item-text">输出报告</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">导出功能</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-excel"></i></div>
+                                <div class="item-text">Excel 报告</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-word"></i></div>
+                                <div class="item-text">Word输入列表</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-file-word"></i></div>
+                                <div class="item-text">Word输出报告</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">高级功能</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                <div class="item-text">模态范围选择</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-grip-horizontal"></i></div>
+                                <div class="item-text">支架</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-check-double"></i></div>
+                                <div class="item-text">法兰校核</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 荷载选项卡内容 -->
+                <div class="ribbon-panel" id="load-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">地震荷载</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-shake"></i></div>
+                                <div class="item-text">静力地震</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">荷载控制</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-list-ol"></i></div>
+                                <div class="item-text">荷载步加载顺序控制</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">环境荷载</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-snowflake"></i></div>
+                                <div class="item-text">雪荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-water"></i></div>
+                                <div class="item-text">浮力荷载</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-wave-square"></i></div>
+                                <div class="item-text">波浪荷载</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">荷载管理</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-trash"></i></div>
+                                <div class="item-text">删除波流荷载</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具选项卡内容 -->
+                <div class="ribbon-panel" id="tools-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">基础选项</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-cog"></i></div>
+                                <div class="item-text">常规选项</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-edit"></i></div>
+                                <div class="item-text">编辑选项</div>
+                            </div>
+                            <div class="ribbon-item small">
+                                <div class="item-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="item-text">描述</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">支架工具</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-grip-horizontal"></i></div>
+                                <div class="item-text">导向支架</div>
+                            </div>
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-save"></i></div>
+                                <div class="item-text">保存结果</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">高级工具</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-database"></i></div>
+                                <div class="item-text">SQLite Report Manager</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-ruler"></i></div>
+                                <div class="item-text">测量距离</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-calculator"></i></div>
+                                <div class="item-text">核算</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">库管理</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-archive"></i></div>
+                                <div class="item-text">库</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-edit"></i></div>
+                                <div class="item-text">库编辑器</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-database"></i></div>
+                                <div class="item-text">修改截面数据库</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ribbon-group">
+                        <div class="group-header">批处理</div>
+                        <div class="group-content">
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="item-text">批处理生成器</div>
+                            </div>
+                            <div class="ribbon-item small p3-priority">
+                                <div class="item-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="item-text">设置</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 支架优化选项卡内容 -->
+                <div class="ribbon-panel" id="support-panel" style="display: none;">
+                    <div class="ribbon-group">
+                        <div class="group-header">支架优化</div>
+                        <div class="group-content">
+                            <div class="ribbon-item large">
+                                <div class="item-icon"><i class="fas fa-refresh"></i></div>
+                                <div class="item-text">重置缺省值</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速访问工具栏 -->
+        <div class="quick-access-toolbar">
+            <div class="quick-item" title="保存">
+                <i class="fas fa-save"></i>
+            </div>
+            <div class="quick-item" title="撤销">
+                <i class="fas fa-undo"></i>
+            </div>
+            <div class="quick-item" title="重做">
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="separator"></div>
+            <div class="quick-item" title="视图适应">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </div>
+        </div>
+
+        <!-- 主工作区域 -->
+        <div class="main-workspace">
+            <!-- 左侧导航面板 -->
+            <div class="left-panel">
+                <!-- 拖拽手柄 -->
+                <div class="resize-handle"></div>
+                
+                <!-- 模型树 -->
+                <div class="panel-section">
+                    <div class="section-header">
+                        <h3>模型树</h3>
+                        <div class="section-controls">
+                            <i class="fas fa-refresh" title="刷新"></i>
+                            <i class="fas fa-expand-arrows-alt" title="展开全部"></i>
+                            <i class="fas fa-compress-arrows-alt" title="收起全部"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="model-tree">
+                            <div class="tree-node expanded">
+                                <div class="node-header">
+                                    <i class="fas fa-chevron-down toggle-icon"></i>
+                                    <i class="fas fa-project-diagram node-icon"></i>
+                                    <span class="node-label">海洋管道工程</span>
+                                </div>
+                                <div class="node-children">
+                                    <!-- 项目信息管理 -->
+                                    <div class="tree-node">
+                                        <div class="node-header">
+                                            <i class="fas fa-chevron-right toggle-icon"></i>
+                                            <i class="fas fa-info-circle node-icon"></i>
+                                            <span class="node-label">项目信息管理</span>
+                                        </div>
+                                        <div class="node-children">
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-file-alt node-icon"></i>
+                                                    <span class="node-label">项目基础信息</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-file-text node-icon"></i>
+                                                    <span class="node-label">项目详细信息</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-list-alt node-icon"></i>
+                                                    <span class="node-label">项目管段信息</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-cog node-icon"></i>
+                                                    <span class="node-label">其他输入信息</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 海洋环境数据 -->
+                                    <div class="tree-node">
+                                        <div class="node-header">
+                                            <i class="fas fa-chevron-right toggle-icon"></i>
+                                            <i class="fas fa-water node-icon"></i>
+                                            <span class="node-label">海洋环境数据</span>
+                                        </div>
+                                        <div class="node-children">
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-wave-square node-icon"></i>
+                                                    <span class="node-label">波浪</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-stream node-icon"></i>
+                                                    <span class="node-label">海流</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-tint node-icon"></i>
+                                                    <span class="node-label">水位</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-thermometer-half node-icon"></i>
+                                                    <span class="node-label">空气温度</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-thermometer-half node-icon"></i>
+                                                    <span class="node-label">海水温度</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-thermometer-half node-icon"></i>
+                                                    <span class="node-label">海床温度</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-seedling node-icon"></i>
+                                                    <span class="node-label">海生物厚度</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-flask node-icon"></i>
+                                                    <span class="node-label">海水腐蚀因子</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-flask node-icon"></i>
+                                                    <span class="node-label">沉积物腐蚀因子</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-weight node-icon"></i>
+                                                    <span class="node-label">海水密度</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 管道系统 -->
+                                    <div class="tree-node expanded">
+                                        <div class="node-header">
+                                            <i class="fas fa-chevron-down toggle-icon"></i>
+                                            <i class="fas fa-layer-group node-icon"></i>
+                                            <span class="node-label">管道系统</span>
+                                        </div>
+                                        <div class="node-children">
+                                            <div class="tree-node">
+                                                <div class="node-header">
+                                                    <i class="fas fa-chevron-right toggle-icon"></i>
+                                                    <i class="fas fa-minus node-icon"></i>
+                                                    <span class="node-label">主管道</span>
+                                                </div>
+                                                <div class="node-children">
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-dot-circle node-icon"></i>
+                                                            <span class="node-label">A00</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-minus node-icon"></i>
+                                                            <span class="node-label">A01</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-dot-circle node-icon"></i>
+                                                            <span class="node-label">A02</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-minus node-icon"></i>
+                                                            <span class="node-label">A03</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-dot-circle node-icon"></i>
+                                                            <span class="node-label">A04</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header">
+                                                    <i class="fas fa-chevron-right toggle-icon"></i>
+                                                    <i class="fas fa-minus node-icon"></i>
+                                                    <span class="node-label">支管道</span>
+                                                </div>
+                                                <div class="node-children">
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-dot-circle node-icon"></i>
+                                                            <span class="node-label">B00</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-minus node-icon"></i>
+                                                            <span class="node-label">B01</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tree-node">
+                                                        <div class="node-header leaf">
+                                                            <span class="leaf-indent"></span>
+                                                            <i class="fas fa-dot-circle node-icon"></i>
+                                                            <span class="node-label">B02</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 支撑系统 -->
+                                    <div class="tree-node">
+                                        <div class="node-header">
+                                            <i class="fas fa-chevron-right toggle-icon"></i>
+                                            <i class="fas fa-anchor node-icon"></i>
+                                            <span class="node-label">支撑系统</span>
+                                        </div>
+                                        <div class="node-children">
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-grip-horizontal node-icon"></i>
+                                                    <span class="node-label">支架-S001</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-grip-horizontal node-icon"></i>
+                                                    <span class="node-label">支架-S002</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 荷载工况 -->
+                                    <div class="tree-node">
+                                        <div class="node-header">
+                                            <i class="fas fa-chevron-right toggle-icon"></i>
+                                            <i class="fas fa-weight-hanging node-icon"></i>
+                                            <span class="node-label">荷载工况</span>
+                                        </div>
+                                        <div class="node-children">
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-thermometer-half node-icon"></i>
+                                                    <span class="node-label">温度荷载</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-tint node-icon"></i>
+                                                    <span class="node-label">压力荷载</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node">
+                                                <div class="node-header leaf">
+                                                    <span class="leaf-indent"></span>
+                                                    <i class="fas fa-weight node-icon"></i>
+                                                    <span class="node-label">重力荷载</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 显隐控制 -->
+                <div class="panel-section" style="position: relative;">
+                    <!-- 显隐控制拖拽手柄 -->
+                    <div class="visibility-resize-handle"></div>
+                    
+                    <div class="section-header">
+                        <h3>显隐控制</h3>
+                        <div class="section-controls">
+                            <i class="fas fa-eye" title="全部显示"></i>
+                            <i class="fas fa-eye-slash" title="全部隐藏"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="visibility-list">
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">管点名称</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">土壤点</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">管点符号</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">管点</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">组件</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">分段</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">所选分段</span>
+                            </div>
+                            <div class="visibility-item active">
+                                <div class="visibility-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="visibility-name">未选分段</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中央视图区域 -->
+            <div class="center-panel">
+                <div class="viewport-container">
+                    <!-- 视图选项卡 -->
+                    <div class="view-tabs">
+                        <div class="view-tab active">
+                            <span>3D视图</span>
+                            <i class="fas fa-times close-tab"></i>
+                        </div>
+                        <div class="view-tab">
+                            <span>平面图</span>
+                            <i class="fas fa-times close-tab"></i>
+                        </div>
+                        <div class="view-tab-add">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+
+                    <!-- 主视图区域 -->
+                    <div class="main-viewport">
+                        <div class="viewport-toolbar">
+                            <div class="toolbar-left">
+                                <div class="view-mode-selector">
+                                    <button class="mode-btn active" title="单视口">
+                                        <i class="fas fa-square-full"></i>
+                                    </button>
+                                    <button class="mode-btn" title="双视口">
+                                        <i class="fas fa-columns"></i>
+                                    </button>
+                                    <button class="mode-btn" title="四视口">
+                                        <i class="fas fa-th-large"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="toolbar-right">
+                                <button class="view-btn" title="适应视图">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                </button>
+                                <button class="view-btn" title="视图设置">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3D画布区域 -->
+                        <div class="canvas-area">
+                            <div class="viewport single-view">
+                                <div class="viewport-header">
+                                    <span class="view-name">3D轴测视图</span>
+                                    <div class="view-controls">
+                                        <i class="fas fa-crosshairs" title="坐标轴"></i>
+                                        <i class="fas fa-th" title="网格"></i>
+                                    </div>
+                                </div>
+                                <div class="canvas-content">
+                                    <div class="canvas-placeholder">
+                                        <div class="placeholder-icon">
+                                            <i class="fas fa-cube"></i>
+                                        </div>
+                                        <div class="placeholder-text">
+                                            <h3>海洋管道三维模型</h3>
+                                            <p>在此处显示管道系统的三维可视化模型</p>
+                                            <p class="hint">支持实时渲染、交互操作和分析结果展示</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 三维坐标轴指示器 -->
+                                    <div class="coordinate-indicator-3d">
+                                        <div class="axis-container">
+                                            <div class="axis-x">
+                                                <div class="axis-line"></div>
+                                                <div class="axis-arrow"></div>
+                                                <div class="axis-label">X</div>
+                                            </div>
+                                            <div class="axis-y">
+                                                <div class="axis-line"></div>
+                                                <div class="axis-arrow"></div>
+                                                <div class="axis-label">Y</div>
+                                            </div>
+                                            <div class="axis-z">
+                                                <div class="axis-line"></div>
+                                                <div class="axis-arrow"></div>
+                                                <div class="axis-label">Z</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧属性面板 -->
+            <div class="right-panel">
+                <!-- 拖拽手柄 -->
+                <div class="resize-handle"></div>
+                
+                <div class="panel-section">
+                    <div class="section-header">
+                        <h3>属性</h3>
+                        <div class="section-controls">
+                            <i class="fas fa-thumbtack" title="固定面板"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="property-tabs">
+                            <div class="prop-tab active">几何</div>
+                            <div class="prop-tab">材料</div>
+                            <div class="prop-tab">荷载</div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-group">
+                                <h4>基本信息</h4>
+                                <div class="property-row">
+                                    <label>名称:</label>
+                                    <input type="text" value="主管道-P001" class="prop-input">
+                                </div>
+                                <div class="property-row">
+                                    <label>类型:</label>
+                                    <select class="prop-select">
+                                        <option>管道</option>
+                                        <option>弯头</option>
+                                        <option>法兰</option>
+                                    </select>
+                                </div>
+                                <div class="property-row">
+                                    <label>ID:</label>
+                                    <span class="prop-value">P001</span>
+                                </div>
+                            </div>
+                            
+                            <div class="property-group">
+                                <h4>几何参数</h4>
+                                <div class="property-row">
+                                    <label>外径:</label>
+                                    <input type="number" value="508" class="prop-input">
+                                    <span class="unit">mm</span>
+                                </div>
+                                <div class="property-row">
+                                    <label>壁厚:</label>
+                                    <input type="number" value="12.7" class="prop-input">
+                                    <span class="unit">mm</span>
+                                </div>
+                                <div class="property-row">
+                                    <label>长度:</label>
+                                    <input type="number" value="6000" class="prop-input">
+                                    <span class="unit">mm</span>
+                                </div>
+                            </div>
+
+                            <div class="property-group">
+                                <h4>材料属性</h4>
+                                <div class="property-row">
+                                    <label>材质:</label>
+                                    <select class="prop-select">
+                                        <option>API 5L X65</option>
+                                        <option>API 5L X70</option>
+                                        <option>ASTM A106</option>
+                                    </select>
+                                </div>
+                                <div class="property-row">
+                                    <label>弹性模量:</label>
+                                    <span class="prop-value">200 GPa</span>
+                                </div>
+                                <div class="property-row">
+                                    <label>屈服强度:</label>
+                                    <span class="prop-value">450 MPa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 消息面板 -->
+                <div class="panel-section" style="position: relative;">
+                    <!-- 消息面板拖拽手柄 -->
+                    <div class="message-resize-handle"></div>
+                    
+                    <div class="section-header">
+                        <h3>消息</h3>
+                        <div class="section-controls">
+                            <i class="fas fa-broom" title="清空消息"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="message-list">
+                            <div class="message-item info">
+                                <div class="message-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">模型加载完成</div>
+                                    <div class="message-time">10:30:25</div>
+                                </div>
+                            </div>
+                            <div class="message-item warning">
+                                <div class="message-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">支架S002位置检查</div>
+                                    <div class="message-time">10:28:15</div>
+                                </div>
+                            </div>
+                            <div class="message-item success">
+                                <div class="message-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">分析计算完成</div>
+                                    <div class="message-time">10:25:08</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部状态栏 -->
+        <div class="status-bar">
+            <div class="status-left">
+                <div class="status-item">
+                    <span class="status-label">状态:</span>
+                    <span class="status-value ready">就绪</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">坐标:</span>
+                    <span class="status-value">X: 0.000, Y: 0.000, Z: 0.000</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">选中:</span>
+                    <span class="status-value">主管道-P001</span>
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="status-item">
+                    <span class="status-label">单位:</span>
+                    <span class="status-value">mm</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">视图:</span>
+                    <span class="status-value">3D轴测</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">网格:</span>
+                    <span class="status-value on">开启</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">精度:</span>
+                    <span class="status-value">0.001</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
